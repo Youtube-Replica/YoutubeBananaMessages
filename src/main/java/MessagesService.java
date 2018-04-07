@@ -61,7 +61,7 @@ public class MessagesService {
                                 cmd = new GetMessage();
                                 HashMap<String, Object> paramsHashMap  =
                                         cmd.jsonToMap((JSONObject) messageBody.get("parameters"));
-                                if (paramsHashMap.containsKey("user_id")) {
+                                if (paramsHashMap.containsKey("sender_id")) {
                                     cmd = new GetMessages();
                                 }
                                 break;

@@ -25,8 +25,6 @@ public class Message {
         }
         DocumentCreateEntity<BaseDocument> createdMessage = getCollection().insertDocument(newMessage);
 
-        atrributes.put("id", createdMessage.getKey());
-
         return atrributes;
     }
 
@@ -57,9 +55,14 @@ public class Message {
     }
 
 
-    public static ArrayList<HashMap<String, Object>> getAll(String userId) {
-        String query = "FOR message IN messages FILTER message.sender_id == @user_id OR message.receiver_id == @user_id RETURN message";
-        Map<String, Object> bindVars = new MapBuilder().put("user_id", userId).get();
+    public static ArrayList<HashMap<String, Object>> getAll(String senderId, String receiverId) {
+        String query = "FOR message IN messages FILTER ((message.receiver_id == @sender_id AND message.sender_id == @receiver_id) " +
+                "OR (message.receiver_id == @receiver_id AND message.sender_id == @sender_id)) RETURN message";
+
+         MapBuilder vars = new MapBuilder();
+         vars.put("sender_id", Integer.parseInt(senderId));
+         vars.put("receiver_id", Integer.parseInt(receiverId));
+         Map<String, Object> bindVars = vars.get();
         ArangoCursor<BaseDocument> cursor = getCollection().db().query(query, bindVars, null,
                 BaseDocument.class);
 
@@ -73,6 +76,7 @@ public class Message {
             message.put("id", aDocument.getKey());
             messages.add(message);
         });
+        System.out.println(messages);
 
         return messages;
     }

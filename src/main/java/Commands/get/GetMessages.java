@@ -26,7 +26,8 @@ public class GetMessages extends Command {
             AMQP.BasicProperties properties             = (AMQP.BasicProperties) props.get("properties");
             AMQP.BasicProperties replyProps             = (AMQP.BasicProperties) props.get("replyProps");
             Envelope envelope                           = (Envelope) props.get("envelope");
-            ArrayList<HashMap<String, Object>> messages = Message.getAll((String) paramsHashMap.get("user_id"));
+            ArrayList<HashMap<String, Object>> messages = Message.getAll((String) paramsHashMap.get("sender_id"),
+                                                            (String) paramsHashMap.get("receiver_id"));
             JSONObject response                         = jsonFromArray(messages, "messages");
             channel.basicPublish(
                     "",
