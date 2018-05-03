@@ -1,0 +1,10 @@
+Commands/patch/UpdateMessage.class
+Model/Message.class
+Commands/delete/DeleteMessage.class
+Commands/get/GetMessages.class
+MessagesService.class
+Commands/post/CreateMessage.class
+MessagesService$1.class
+Commands/Command.class
+lib/ArangoClient.class
+Commands/get/GetMessage.class

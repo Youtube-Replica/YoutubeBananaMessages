@@ -24,10 +24,8 @@ public class MessagesService {
         final ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
 
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        factory.setHost("localhost");
-        factory.setUsername("rabbitmq");
-        factory.setPassword("rabbitmq");
+        String host = System.getenv("RABBIT_MQ_SERVICE_HOST");
+        factory.setHost(host);
         Connection connection = null;
         try {
             connection = factory.newConnection();
