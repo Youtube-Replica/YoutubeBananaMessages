@@ -6,8 +6,9 @@ import com.arangodb.ArangoDBException;
 import com.arangodb.ArangoDatabase;
 
 public class ArangoClient {
-    private static final String DB_NAME = "messages_service";
-    private static final ArangoDB.Builder arangoDBBuilder = new ArangoDB.Builder();
+    private static final String DB_NAME = "scalable";
+    private static String host = System.getenv("ARANGO_DB_SERVICE_HOST");
+    private static final ArangoDB.Builder arangoDBBuilder = new ArangoDB.Builder().host(host, 8529);
 
     public static ArangoCollection createOrRetrieveCollection(String collectionName) {
         ArangoDatabase db = createOrRetrieveDB();
@@ -49,7 +50,6 @@ public class ArangoClient {
 
     private static ArangoDB arangoDBConnection() {
         // here you can set all the specific configuration
-        arangoDBBuilder.password("blabla");
         return arangoDBBuilder.build();
     }
 }

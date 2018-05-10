@@ -33,7 +33,6 @@ public class MessagesService {
 
             channel.queueDeclare(RPC_QUEUE_NAME, false, false, false, null);
 
-            channel.basicQos(100);
 
             System.out.println(" [x] Awaiting RPC requests");
 
@@ -91,7 +90,7 @@ public class MessagesService {
                 }
             };
 
-            channel.basicConsume(RPC_QUEUE_NAME, false, consumer);
+            channel.basicConsume(RPC_QUEUE_NAME, true, consumer);
         } catch (IOException | TimeoutException e) {
             e.printStackTrace();
         }

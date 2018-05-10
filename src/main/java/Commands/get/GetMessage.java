@@ -32,7 +32,6 @@ public class GetMessage extends Command {
                     properties.getReplyTo(),
                     replyProps,
                     response.toString().getBytes("UTF-8"));
-            channel.basicAck(envelope.getDeliveryTag(), false);
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (IOException e) {
